@@ -8,34 +8,39 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
+import com.github.rtoshiro.util.format.SimpleMaskFormatter;
+import com.github.rtoshiro.util.format.text.MaskTextWatcher;
+
 import br.com.ednaldomartins.onemessenger.Fragment.ConfirmarLoginFragment;
-import br.com.ednaldomartins.onemessenger.Fragment.LoginFragment;
 import br.com.ednaldomartins.onemessenger.R;
 
 public class LoginActivity extends AppCompatActivity {
 
-    private EditText nome, regiao, ddd, telefone, codigo;
-    private Button continuar, confirmar;
+    private EditText nomeUsuario, codigoPais, numeroTelefone, codigoValidacao;
+    private Button botaoContinuar, botaoConfirmar;
 
-    Button teste;
-    int opt = 1;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
+        //elementos da tela de login
+        nomeUsuario     = (EditText) findViewById(R.id.login_nomeUsuario);
+        codigoPais      = (EditText) findViewById(R.id.login_codigoPais);
+        numeroTelefone  = (EditText) findViewById(R.id.login_numeroTelefone);
+        botaoContinuar  = (Button) findViewById(R.id.login_botaoContinuar);
 
-        nome = (EditText) findViewById(R.id.login_nomeUsuario);
-        regiao = (EditText) findViewById(R.id.login_regiao);
-        ddd = (EditText) findViewById(R.id.login_ddd);
-        telefone = (EditText) findViewById(R.id.login_telefone);
-        continuar = (Button) findViewById(R.id.login_botaoContinuar);
+        //elementos da tela de confirmacao
+        codigoValidacao = (EditText) findViewById(R.id.login_codigoValidacao);
+        botaoConfirmar  = (Button) findViewById(R.id.login_botaoContinuar);
 
-        codigo = (EditText) findViewById(R.id.login_codigoValidacao);
-        confirmar = (Button) findViewById(R.id.login_botaoContinuar);
+        //PENSAR SE EH POSSIVEL ALGO MAIS GENERICO, COMO CRIAR OBJETOS Q IMPLEMENTEM UMA INTERFACE.
+        formatarMascara(numeroTelefone, "(NN)NNNNN-NNNN");
+        formatarMascara(codigoPais, "+NN");
 
 
-        continuar.setOnClickListener(new View.OnClickListener() {
+        //chamando a tela de validacao
+        botaoContinuar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 FragmentManager fragmentManager = getFragmentManager();
@@ -49,4 +54,20 @@ public class LoginActivity extends AppCompatActivity {
         });
 
     }
+
+
+    /***
+     * Mascara openSource:
+     * mascara para adaptacao das entradas dos usuarios na tela de login
+     * LINK: https://github.com/rtoshiro/MaskFormatter
+     * IMPLEMENTATION: 'com.github.rtoshiro.mflibrary:mflibrary:1.0.0'
+     * ***/
+    public void formatarMascara (EditText editText, String formato)
+    {
+        SimpleMaskFormatter mascara = new SimpleMaskFormatter(formato);
+        MaskTextWatcher observador = new MaskTextWatcher(editText, mascara);
+        editText.addTextChangedListener(observador);
+    }
+
 }
+

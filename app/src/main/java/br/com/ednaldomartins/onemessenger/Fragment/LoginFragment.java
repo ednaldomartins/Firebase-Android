@@ -1,10 +1,7 @@
 package br.com.ednaldomartins.onemessenger.Fragment;
 
 import android.app.Fragment;
-import android.app.FragmentManager;
-import android.app.FragmentTransaction;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,7 +9,6 @@ import android.widget.Button;
 import android.widget.EditText;
 
 import br.com.ednaldomartins.onemessenger.R;
-import br.com.ednaldomartins.onemessenger.Fragment.ConfirmarLoginFragment;
 
 public class LoginFragment extends Fragment {
 
@@ -30,9 +26,8 @@ public class LoginFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_login, container, false);
 
         nome = (EditText) view.findViewById(R.id.login_nomeUsuario);
-        regiao = (EditText) view.findViewById(R.id.login_regiao);
-        ddd = (EditText) view.findViewById(R.id.login_ddd);
-        telefone = (EditText) view.findViewById(R.id.login_telefone);
+        regiao = (EditText) view.findViewById(R.id.login_codigoPais);
+        telefone = (EditText) view.findViewById(R.id.login_numeroTelefone);
         continuar = (Button) view.findViewById(R.id.login_botaoContinuar);
 
         return view;
