@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">OneMessenger</string>
+
+    <!-- TODO: textos prontos -->
+    <string name="mensagem_validacao">
+        Em instantes você receberá um SMS com o código para validar o número de telefone informado. Digite o código abaixo:
+    </string>
+
+</resources>
