@@ -36,6 +36,14 @@ public class ConfirmarLoginFragment extends Fragment {
         //elementos da tela de confirmacao
         codigoValidacao = (EditText) view.findViewById(R.id.login_codigoValidacao);
         botaoConfirmar  = (Button) view.findViewById(R.id.login_botaoContinuar);
+
+
+        botaoConfirmar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
     }
 }
 

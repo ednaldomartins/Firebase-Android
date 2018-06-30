@@ -13,6 +13,10 @@ import android.widget.EditText;
 
 import com.github.rtoshiro.util.format.SimpleMaskFormatter;
 import com.github.rtoshiro.util.format.text.MaskTextWatcher;
+import com.google.firebase.auth.PhoneAuthProvider;
+
+import java.util.Random;
+import java.util.concurrent.TimeUnit;
 
 import br.com.ednaldomartins.onemessenger.R;
 
@@ -43,7 +47,7 @@ public class LoginFragment extends Fragment {
         numeroTelefone  = (EditText) view.findViewById(R.id.login_numeroTelefone);
         botaoContinuar  = (Button) view.findViewById(R.id.login_botaoContinuar);
 
-        //PENSAR SE EH POSSIVEL ALGO MAIS GENERICO, COMO CRIAR OBJETOS Q IMPLEMENTEM UMA INTERFACE.
+        //PENSAR SE EH POSSIVEL ALGO MAIS GENERICO, COMO CRIAR OBJETOS QUE IMPLEMENTEM UMA INTERFACE.
         formatarMascara(numeroTelefone, "(NN)NNNNN-NNNN");
         formatarMascara(codigoPais, "+NN");
 
@@ -52,6 +56,38 @@ public class LoginFragment extends Fragment {
         botaoContinuar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
+                /**
+                 * usar FACADE para configurar todas as opreções abaixo em outra classe
+                 * que ficarah responsavel por todas as funcoes
+                 */
+                //guardando apenas valores em variaveis auxiliares
+                String nomeCompleto = nomeUsuario.getText().toString();
+                String telefoneCompleto = codigoPais.getText().toString() + numeroTelefone.getText().toString();
+                //truncando valores do telefone para guardar apenas numeros
+                telefoneCompleto.replace("+", "");
+                telefoneCompleto.replace("(", "");
+                telefoneCompleto.replace(")", "");
+                telefoneCompleto.replace("-", "");
+
+                //String telefoneSemFormatacao = telefoneCompleto.replaceAll("[^0-9]" ,"");
+
+                //gerar codigo de validacao(TESTE)
+                Random random = new Random();
+                int codigoDeValidacao = random.nextInt(899999) + 100000;
+                /**
+                 * usar o fireBase para autenticacao:
+                 * https://firebase.google.com/docs/auth/android/phone-auth?hl=pt-br
+
+                PhoneAuthProvider.getInstance().verifyPhoneNumber(
+                        telefoneCompleto,
+                        60,
+                        TimeUnit.SECONDS,
+                        this,
+                        mCallbacks);
+                */
+
+                //transicao entre os fragmentos
                 FragmentManager fragmentManager = getFragmentManager();
                 FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
 
