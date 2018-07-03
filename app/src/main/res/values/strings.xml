@@ -2,6 +2,10 @@
     <string name="app_name">OneMessenger</string>
 
     <!-- TODO: textos prontos -->
+    <string name="mensagem_loginGoogle">
+        Faça login com sua conta da Google para usar o aplicativo.
+    </string>
+
     <string name="mensagem_validacao">
         Em instantes você receberá um SMS com o código para validar o número de telefone informado. Digite o código abaixo:
     </string>

@@ -16,62 +16,33 @@
         android:layout_height="match_parent"
         android:background="@color/OneColorPrimary">
 
-        <EditText
-            android:id="@+id/login_nomeUsuario"
+        <com.google.android.gms.common.SignInButton
+            android:id="@+id/login_botaoSignIn"
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="16dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/login_textoLogin">
+
+        </com.google.android.gms.common.SignInButton>
+
+        <TextView
+            android:id="@+id/login_textoLogin"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="16dp"
-            android:layout_marginStart="16dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginStart="8dp"
             android:layout_marginTop="16dp"
-            android:ems="10"
-            android:hint="Digite seu nome"
-            android:inputType="textPersonName"
+            android:text="@string/mensagem_loginGoogle"
             android:textColor="@color/textColorPrimary"
+            android:textSize="@dimen/tamanho_texto_app"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <EditText
-            android:id="@+id/login_codigoPais"
-            android:layout_width="50dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="8dp"
-            android:ems="10"
-            android:hint="+55"
-            android:inputType="number"
-            android:textColor="@color/textColorPrimary"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/login_nomeUsuario" />
-
-        <EditText
-            android:id="@+id/login_numeroTelefone"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="16dp"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="8dp"
-            android:ems="10"
-            android:hint="telefone"
-            android:inputType="number"
-            android:textColor="@color/textColorPrimary"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/login_codigoPais"
-            app:layout_constraintTop_toBottomOf="@+id/login_nomeUsuario" />
-
-        <Button
-            android:id="@+id/login_botaoContinuar"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="16dp"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="24dp"
-            android:background="@color/OneColorPrimaryDark"
-            android:text="Continuar"
-            android:textColor="@color/textColorPrimary"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/login_numeroTelefone" />
 
     </android.support.constraint.ConstraintLayout>
 </FrameLayout>
