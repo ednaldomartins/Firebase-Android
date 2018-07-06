@@ -7,37 +7,37 @@ import br.com.ednaldomartins.onemessenger.model.Usuario;
 
 public class UsuarioFirebase {
 
-    FirebaseUser firebaseUser;
+    FirebaseUser usuarioFirebase;
 
     public UsuarioFirebase() {
     }
 
-    public UsuarioFirebase(FirebaseUser firebaseUser) {
-        this.firebaseUser = firebaseUser;
+    public UsuarioFirebase(FirebaseUser usuarioFirebase) {
+        this.usuarioFirebase = usuarioFirebase;
     }
 
-    public FirebaseUser getFirebaseUser()
+    public FirebaseUser getUsuarioFirebase()
     {
-        return firebaseUser;
+        return usuarioFirebase;
     }
 
-    public void setFirebaseUser(FirebaseUser firebaseUser)
+    public void setUsuarioFirebase(FirebaseUser usuarioFirebase)
     {
-        this.firebaseUser = firebaseUser;
+        this.usuarioFirebase = usuarioFirebase;
     }
 
-    public Usuario getUsuarioFirebaser()
+    public Usuario getObjetoUsuarioFirebaser()
     {
         Usuario usuario = new Usuario();
-        usuario.setId(firebaseUser.getProviderId());
-        usuario.setName(firebaseUser.getDisplayName());
-        usuario.setEmail(firebaseUser.getEmail());
+        usuario.setId(usuarioFirebase.getProviderId());
+        usuario.setName(usuarioFirebase.getDisplayName());
+        usuario.setEmail(usuarioFirebase.getEmail());
         return usuario;
     }
 
     public boolean usuarioLogado()
     {
-        if(firebaseUser != null) {
+        if(usuarioFirebase != null) {
             return true;
         }
         else {
