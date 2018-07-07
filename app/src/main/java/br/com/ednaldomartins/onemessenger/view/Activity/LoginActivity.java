@@ -27,11 +27,11 @@ import br.com.ednaldomartins.onemessenger.data.local.UsuarioPreferencias;
 import br.com.ednaldomartins.onemessenger.data.remote.UsuarioFirebase;
 
 
-/***
- * TELA DE LOGIN DO USUARIO
- * exemplo do FireBase para autenticacao com a conta Google, disponivel no gitHub no link:
- * https://github.com/firebase/quickstart-android/blob/master/auth/app/src/main/java/com/google/firebase/quickstart/auth
- */
+/****************************************************************************************************************************
+ * TELA DE LOGIN DO USUARIO                                                                                                 *
+ * exemplo do FireBase para autenticacao com a conta Google, disponivel no gitHub no link:                                  *
+ * https://github.com/firebase/quickstart-android/blob/master/auth/app/src/main/java/com/google/firebase/quickstart/auth    *
+ ****************************************************************************************************************************/
 public class LoginActivity extends AppCompatActivity implements View.OnClickListener{
 
     private static final String TAG = "LoginActivity";
@@ -183,9 +183,10 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         }
     }
 
-//    @Override
-//    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
-//        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
-//    }
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        permissao.garantirPermissao(this, grantResults, requestCode);
+    }
 }
 
