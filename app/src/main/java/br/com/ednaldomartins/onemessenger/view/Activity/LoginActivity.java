@@ -21,8 +21,6 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.GoogleAuthProvider;
 
-import java.util.HashMap;
-
 import br.com.ednaldomartins.onemessenger.R;
 import br.com.ednaldomartins.onemessenger.control.Permissao;
 import br.com.ednaldomartins.onemessenger.data.local.UsuarioPreferencias;
@@ -60,13 +58,13 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         super.onStart();
         // Check if user is signed in (non-null) and update UI accordingly.
         //FirebaseUser currentUser = mAuth.getCurrentUser();
-        usuarioFirebase = new UsuarioFirebase( mAuth.getCurrentUser() );
-        usuarioPreferencias = new UsuarioPreferencias( getApplicationContext() );
-        usuarioPreferencias.salvarUsuarioPreferencias( usuarioFirebase.getObjetoUsuarioFirebaser() );
-        HashMap<String, String> usuario = usuarioPreferencias.getDadosUsuariosPreferencias();
-//        Log.i("ID", "id:" + usuario.get("id") );
-//        Log.i("NOME", "Nome:" + usuario.get("nome") );
-//        Log.i("EMAIL", "e-mail:" + usuario.get("email") );
+        if(mAuth.getCurrentUser() != null) {
+            salvarLogin();
+//            HashMap<String, String> usuario = usuarioPreferencias.getDadosUsuariosPreferencias();
+//            Log.i("ID", "id:" + usuario.get("id") );
+//            Log.i("NOME", "Nome:" + usuario.get("nome") );
+//            Log.i("EMAIL", "e-mail:" + usuario.get("email") );
+        }
     }
 
     @Override
@@ -128,20 +126,12 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                         if (task.isSuccessful()) {
                             // Sign in success, update UI with the signed-in user's information
                             Log.d(TAG, "signInWithCredential:success");
-                            // usuario auxiliar destruido no fim do metodo
-                            //FirebaseUser user = mAuth.getCurrentUser();
-                            // usuario do app
-                            usuarioFirebase.setUsuarioFirebase( mAuth.getCurrentUser() );
-                            usuarioPreferencias.salvarUsuarioPreferencias( usuarioFirebase.getObjetoUsuarioFirebaser() );
-
+                            salvarLogin();
                         } else {
                             // If sign in fails, display a message to the user.
                             Log.w(TAG, "signInWithCredential:failure", task.getException());
                             Snackbar.make(findViewById(R.id.login_constraintFragmentLogin), "Authentication Failed.", Snackbar.LENGTH_SHORT).show();
-
                         }
-
-                        // ...
                     }
                 });
 
@@ -154,6 +144,12 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
     private void signOut() {
         FirebaseAuth.getInstance().signOut();
+    }
+
+    private void salvarLogin() {
+        usuarioFirebase = new UsuarioFirebase( mAuth.getCurrentUser() );
+        usuarioPreferencias = new UsuarioPreferencias( getApplicationContext() );
+        usuarioPreferencias.salvarUsuarioPreferencias( usuarioFirebase.getObjetoUsuarioFirebaser() );
     }
 
 
@@ -184,8 +180,6 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         int id = view.getId();
         if(id == R.id.login_botaoSignIn) {
             signIn();
-
-
         }
     }
 
