@@ -24,6 +24,7 @@ import com.google.firebase.auth.GoogleAuthProvider;
 import java.util.HashMap;
 
 import br.com.ednaldomartins.onemessenger.R;
+import br.com.ednaldomartins.onemessenger.control.Permissao;
 import br.com.ednaldomartins.onemessenger.data.local.UsuarioPreferencias;
 import br.com.ednaldomartins.onemessenger.data.remote.UsuarioFirebase;
 
@@ -44,6 +45,8 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     private UsuarioPreferencias usuarioPreferencias;
     //google
     private GoogleSignInClient mGoogleSignInClient;
+
+    Permissao permissao = new Permissao();
 
 
 
@@ -70,6 +73,9 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+
+        //testando chamada de permissoes
+        permissao.validarPermissoes(this, 0);
 
         mAuth = FirebaseAuth.getInstance();
 
@@ -178,6 +184,8 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         int id = view.getId();
         if(id == R.id.login_botaoSignIn) {
             signIn();
+
+
         }
     }
 
