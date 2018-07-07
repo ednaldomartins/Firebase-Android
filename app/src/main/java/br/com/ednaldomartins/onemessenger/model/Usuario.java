@@ -3,7 +3,7 @@ package br.com.ednaldomartins.onemessenger.model;
 public class Usuario {
 
     private String id;
-    private String name;
+    private String nome;
     private String email;
 
     public Usuario() {
@@ -15,7 +15,7 @@ public class Usuario {
     }
 
     public String getNome() {
-        return name;
+        return nome;
     }
 
     public String getEmail() {
@@ -27,10 +27,12 @@ public class Usuario {
     }
 
     public void setName(String nome) {
-        this.name = name;
+        this.nome = nome;
     }
 
     public void setEmail(String email) {
         this.email = email;
     }
+
+
 }

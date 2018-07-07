@@ -29,7 +29,7 @@ public class UsuarioFirebase {
     public Usuario getObjetoUsuarioFirebaser()
     {
         Usuario usuario = new Usuario();
-        usuario.setId(usuarioFirebase.getProviderId());
+        usuario.setId(usuarioFirebase.getUid());
         usuario.setName(usuarioFirebase.getDisplayName());
         usuario.setEmail(usuarioFirebase.getEmail());
         return usuario;

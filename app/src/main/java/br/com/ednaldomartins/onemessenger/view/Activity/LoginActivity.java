@@ -21,6 +21,8 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.GoogleAuthProvider;
 
+import java.util.HashMap;
+
 import br.com.ednaldomartins.onemessenger.R;
 import br.com.ednaldomartins.onemessenger.data.local.UsuarioPreferencias;
 import br.com.ednaldomartins.onemessenger.data.remote.UsuarioFirebase;
@@ -57,8 +59,11 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         //FirebaseUser currentUser = mAuth.getCurrentUser();
         usuarioFirebase = new UsuarioFirebase( mAuth.getCurrentUser() );
         usuarioPreferencias = new UsuarioPreferencias( getApplicationContext() );
-        usuarioPreferencias.salvarUsuarioPreferencisas( usuarioFirebase.getObjetoUsuarioFirebaser() );
-
+        usuarioPreferencias.salvarUsuarioPreferencias( usuarioFirebase.getObjetoUsuarioFirebaser() );
+        HashMap<String, String> usuario = usuarioPreferencias.getDadosUsuariosPreferencias();
+//        Log.i("ID", "id:" + usuario.get("id") );
+//        Log.i("NOME", "Nome:" + usuario.get("nome") );
+//        Log.i("EMAIL", "e-mail:" + usuario.get("email") );
     }
 
     @Override
@@ -121,7 +126,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                             //FirebaseUser user = mAuth.getCurrentUser();
                             // usuario do app
                             usuarioFirebase.setUsuarioFirebase( mAuth.getCurrentUser() );
-                            usuarioPreferencias.salvarUsuarioPreferencisas( usuarioFirebase.getObjetoUsuarioFirebaser() );
+                            usuarioPreferencias.salvarUsuarioPreferencias( usuarioFirebase.getObjetoUsuarioFirebaser() );
 
                         } else {
                             // If sign in fails, display a message to the user.
@@ -176,6 +181,9 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         }
     }
 
-
+//    @Override
+//    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+//        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+//    }
 }
 
