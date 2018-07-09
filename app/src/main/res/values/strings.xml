@@ -10,4 +10,8 @@
         Em instantes você receberá um SMS com o código para validar o número de telefone informado. Digite o código abaixo:
     </string>
 
+    <string name="mensagem_permissoes">
+        Para continuar a utilizar o app, é necessário aceitar as permissões necessárias. Aceite as permissões e abra o aplicativo novamente.
+    </string>
+
 </resources>

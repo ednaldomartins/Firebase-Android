@@ -4,8 +4,11 @@ import android.Manifest;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.net.Uri;
 import android.os.Build;
+import android.provider.Settings;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 
@@ -83,16 +86,25 @@ public class Permissao {
         //alertBuilder para dar forma
         AlertDialog.Builder alertBuilder = new AlertDialog.Builder(activity)
                 .setTitle("Permissões Negadas")
-                .setMessage("Para continuar a utilizar o app, é necessário aceitar as permissões")
+                .setMessage("Para continuar a utilizar o aplicativo, é necessário aceitar as permissões necessárias. Aceite as permissões e abra o aplicativo novamente.")
+                .setCancelable(false)
                 .setPositiveButton("Confirmar", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
+                        activity.startActivity(getIntentConfiguracoesAplicativo(activity.getApplicationContext().getPackageName()));
                         activity.finish();
                     }
                 });
         //alerta para mostrar caixa de dialogo
         AlertDialog alerta = alertBuilder.create();
         alerta.show();
+    }
+
+    private Intent getIntentConfiguracoesAplicativo (String packageName)
+    {
+        Intent intent = new Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS, Uri.fromParts("package", packageName, null));
+        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        return intent;
     }
 
 }

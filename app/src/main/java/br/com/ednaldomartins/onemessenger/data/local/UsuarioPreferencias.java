@@ -45,7 +45,6 @@ public class UsuarioPreferencias {
 
     public String getCHAVE_ID() {
         return CHAVE_ID;
-
     }
 
     public String getCHAVE_NOME() {
