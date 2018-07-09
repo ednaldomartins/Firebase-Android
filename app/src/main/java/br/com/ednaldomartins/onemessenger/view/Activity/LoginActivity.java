@@ -24,6 +24,7 @@ import com.google.firebase.auth.GoogleAuthProvider;
 import br.com.ednaldomartins.onemessenger.R;
 import br.com.ednaldomartins.onemessenger.control.Permissao;
 import br.com.ednaldomartins.onemessenger.data.local.UsuarioPreferencias;
+import br.com.ednaldomartins.onemessenger.data.remote.ConfiguracaoFirebase;
 import br.com.ednaldomartins.onemessenger.data.remote.UsuarioFirebase;
 
 
@@ -58,7 +59,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         super.onStart();
         // Check if user is signed in (non-null) and update UI accordingly.
         //FirebaseUser currentUser = mAuth.getCurrentUser();
-        if(mAuth.getCurrentUser() != null) {
+        if(ConfiguracaoFirebase.getAutenticacao().getCurrentUser() != null) {
             salvarLogin();
 //            HashMap<String, String> usuario = usuarioPreferencias.getDadosUsuariosPreferencias();
 //            Log.i("ID", "id:" + usuario.get("id") );
@@ -73,9 +74,12 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         setContentView(R.layout.activity_login);
 
         //testando chamada de permissoes
-        permissao.validarPermissoes(this, 0);
+        //permissao.validarPermissoes(this, 0);
 
-        mAuth = FirebaseAuth.getInstance();
+        //ConfiguracaoFirebase.getReferenciaFirebase().child("teste3").setValue("teste1 da classe");
+        //mAuth = FirebaseAuth.getInstance();
+        //ConfiguracaoFirebase.setAutenticacao( FirebaseAuth.getInstance() );
+        //ConfiguracaoFirebase.getAutenticacaoFirebase();
 
         // Configure Google Sign In
         GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
@@ -99,7 +103,6 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-
         // Result returned from launching the Intent from GoogleSignInApi.getSignInIntent(...);
         if (requestCode == RC_SIGN_IN) {
             Task<GoogleSignInAccount> task = GoogleSignIn.getSignedInAccountFromIntent(data);
@@ -119,7 +122,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         Log.d(TAG, "firebaseAuthWithGoogle:" + acct.getId());
 
         AuthCredential credential = GoogleAuthProvider.getCredential(acct.getIdToken(), null);
-        mAuth.signInWithCredential(credential)
+        ConfiguracaoFirebase.getAutenticacao().signInWithCredential(credential)
                 .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
@@ -147,7 +150,8 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     }
 
     private void salvarLogin() {
-        usuarioFirebase = new UsuarioFirebase( mAuth.getCurrentUser() );
+        //ConfiguracaoFirebase.setAutenticacaoFirebase(mAuth);
+        usuarioFirebase = new UsuarioFirebase( ConfiguracaoFirebase.getAutenticacao().getCurrentUser() );
         usuarioPreferencias = new UsuarioPreferencias( getApplicationContext() );
         usuarioPreferencias.salvarUsuarioPreferencias( usuarioFirebase.getObjetoUsuarioFirebaser() );
     }

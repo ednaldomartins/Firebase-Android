@@ -45,9 +45,5 @@ public class UsuarioFirebase {
         }
     }
 
-    private void signOut()
-    {
-        FirebaseAuth.getInstance().signOut();
-    }
 
 }
