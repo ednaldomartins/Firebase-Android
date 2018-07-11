@@ -17,7 +17,7 @@
         android:background="@color/OneColorPrimary">
 
         <com.google.android.gms.common.SignInButton
-            android:id="@+id/login_botaoSignIn"
+            android:id="@+id/login_botaoSignInGoogle"
             android:layout_width="wrap_content"
             android:layout_height="0dp"
             android:layout_marginEnd="8dp"

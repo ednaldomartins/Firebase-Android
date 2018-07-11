@@ -15,14 +15,14 @@ import android.support.v4.content.ContextCompat;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Permissao {
+public class ControllerPermissao {
     private final String [] permissoes;
     private final int NUMERO_DE_PERMISSOES = 2;
     //permissoes do APP
     private final String SEND_SMS = Manifest.permission.SEND_SMS;
     private final String INTERNET = Manifest.permission.INTERNET;
 
-    public Permissao()
+    public ControllerPermissao()
     {
         this.permissoes = new String[NUMERO_DE_PERMISSOES];
         this.permissoes[0] = SEND_SMS;

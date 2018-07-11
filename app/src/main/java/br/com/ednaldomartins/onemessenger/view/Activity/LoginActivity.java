@@ -22,10 +22,11 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.GoogleAuthProvider;
 
 import br.com.ednaldomartins.onemessenger.R;
-import br.com.ednaldomartins.onemessenger.control.Permissao;
+import br.com.ednaldomartins.onemessenger.control.ControllerData;
+import br.com.ednaldomartins.onemessenger.control.ControllerPermissao;
 import br.com.ednaldomartins.onemessenger.data.local.UsuarioPreferencias;
 import br.com.ednaldomartins.onemessenger.data.remote.ConfiguracaoFirebase;
-import br.com.ednaldomartins.onemessenger.data.remote.UsuarioFirebase;
+import br.com.ednaldomartins.onemessenger.model.UsuarioFirebase;
 
 
 /****************************************************************************************************************************
@@ -45,7 +46,9 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     //google
     private GoogleSignInClient mGoogleSignInClient;
 
-    Permissao permissao = new Permissao();
+    //vai sair dessa activity
+    ControllerPermissao controllerPermissao = new ControllerPermissao();
+    ControllerData controllerData = new ControllerData();
 
 
 
@@ -59,8 +62,9 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         super.onStart();
         // Check if user is signed in (non-null) and update UI accordingly.
         //FirebaseUser currentUser = mAuth.getCurrentUser();
-        if(ConfiguracaoFirebase.getAutenticacao().getCurrentUser() != null) {
-            salvarLogin();
+        //if(ConfiguracaoFirebase.getAutenticacao().getCurrentUser() != null) {
+        if(controllerData.usuarioLogado()) {
+            controllerData.salvarUsuario(LoginActivity.this);
 //            HashMap<String, String> usuario = usuarioPreferencias.getDadosUsuariosPreferencias();
 //            Log.i("ID", "id:" + usuario.get("id") );
 //            Log.i("NOME", "Nome:" + usuario.get("nome") );
@@ -72,14 +76,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
-
-        //testando chamada de permissoes
-        //permissao.validarPermissoes(this, 0);
-
-        //ConfiguracaoFirebase.getReferenciaFirebase().child("teste3").setValue("teste1 da classe");
         //mAuth = FirebaseAuth.getInstance();
-        //ConfiguracaoFirebase.setAutenticacao( FirebaseAuth.getInstance() );
-        //ConfiguracaoFirebase.getAutenticacaoFirebase();
 
         // Configure Google Sign In
         GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
@@ -116,6 +113,8 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                 // ...
             }
         }
+
+
     }
 
     private void firebaseAuthWithGoogle(GoogleSignInAccount acct) {
@@ -129,7 +128,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                         if (task.isSuccessful()) {
                             // Sign in success, update UI with the signed-in user's information
                             Log.d(TAG, "signInWithCredential:success");
-                            salvarLogin();
+                            controllerData.salvarUsuario(LoginActivity.this);
                         } else {
                             // If sign in fails, display a message to the user.
                             Log.w(TAG, "signInWithCredential:failure", task.getException());
@@ -149,12 +148,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         FirebaseAuth.getInstance().signOut();
     }
 
-    private void salvarLogin() {
-        //ConfiguracaoFirebase.setAutenticacaoFirebase(mAuth);
-        usuarioFirebase = new UsuarioFirebase( ConfiguracaoFirebase.getAutenticacao().getCurrentUser() );
-        usuarioPreferencias = new UsuarioPreferencias( getApplicationContext() );
-        usuarioPreferencias.salvarUsuarioPreferencias( usuarioFirebase.getObjetoUsuarioFirebaser() );
-    }
+
 
 
 
@@ -175,14 +169,14 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     protected void iniciarListener () {
         //findViewById(R.id.login_logoApp).setOnClickListener(this);
         //findViewById(R.id.login_nomeApp).setOnClickListener(this);
-        findViewById(R.id.login_botaoSignIn).setOnClickListener(this);
+        findViewById(R.id.login_botaoSignInGoogle).setOnClickListener(this);
     }
 
     //implementacao do metodo para executar funcoes dos clicks
     @Override
     public void onClick(View view) {
         int id = view.getId();
-        if(id == R.id.login_botaoSignIn) {
+        if(id == R.id.login_botaoSignInGoogle) {
             signIn();
         }
     }
@@ -190,7 +184,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
-        permissao.garantirPermissao(this, grantResults, requestCode);
+        controllerPermissao.garantirPermissao(this, grantResults, requestCode);
     }
 }
 
