@@ -1,4 +1,4 @@
-package br.com.ednaldomartins.onemessenger.control;
+package br.com.ednaldomartins.onemessenger.business.control;
 
 import android.Manifest;
 import android.app.Activity;

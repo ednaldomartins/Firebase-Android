@@ -1,4 +1,4 @@
-package br.com.ednaldomartins.onemessenger.model;
+package br.com.ednaldomartins.onemessenger.business.model;
 
 import com.google.firebase.auth.FirebaseUser;
 

@@ -9,11 +9,11 @@
 
     <ImageView
         android:id="@+id/login_logoApp"
-        android:layout_width="@dimen/largura_logo"
+        android:layout_width="wrap_content"
         android:layout_height="@dimen/altura_logo"
-        android:layout_marginEnd="24dp"
+        android:layout_marginEnd="32dp"
         android:layout_marginStart="32dp"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="64dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"

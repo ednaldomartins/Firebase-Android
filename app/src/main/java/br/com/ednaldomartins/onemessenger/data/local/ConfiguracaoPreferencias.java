@@ -5,9 +5,9 @@ import android.content.SharedPreferences;
 
 import java.util.HashMap;
 
-import br.com.ednaldomartins.onemessenger.model.Usuario;
+import br.com.ednaldomartins.onemessenger.business.model.Usuario;
 
-public class UsuarioPreferencias {
+public class ConfiguracaoPreferencias {
     private Context contexto;
     private SharedPreferences preferencias;
     private SharedPreferences.Editor editor;
@@ -18,7 +18,7 @@ public class UsuarioPreferencias {
     private String CHAVE_NOME = "nome";
     private String CHAVE_EMAIL = "email";
 
-    public UsuarioPreferencias(Context contexto) {
+    public ConfiguracaoPreferencias(Context contexto) {
         this.contexto = contexto;
         preferencias = this.contexto.getSharedPreferences(NOME_ARQUIVO, MODO_PRIVADO);
         editor = preferencias.edit();

@@ -21,12 +21,14 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.GoogleAuthProvider;
 
+import java.util.HashMap;
+
 import br.com.ednaldomartins.onemessenger.R;
-import br.com.ednaldomartins.onemessenger.control.ControllerData;
-import br.com.ednaldomartins.onemessenger.control.ControllerPermissao;
-import br.com.ednaldomartins.onemessenger.data.local.UsuarioPreferencias;
+import br.com.ednaldomartins.onemessenger.business.control.ControllerData;
+import br.com.ednaldomartins.onemessenger.business.control.ControllerPermissao;
+import br.com.ednaldomartins.onemessenger.data.local.ConfiguracaoPreferencias;
 import br.com.ednaldomartins.onemessenger.data.remote.ConfiguracaoFirebase;
-import br.com.ednaldomartins.onemessenger.model.UsuarioFirebase;
+import br.com.ednaldomartins.onemessenger.business.model.UsuarioFirebase;
 
 
 /****************************************************************************************************************************
@@ -42,7 +44,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     private FirebaseAuth mAuth;
     //usuario logado
     private UsuarioFirebase usuarioFirebase;
-    private UsuarioPreferencias usuarioPreferencias;
+    private ConfiguracaoPreferencias configuracaoPreferencias;
     //google
     private GoogleSignInClient mGoogleSignInClient;
 
@@ -65,7 +67,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         //if(ConfiguracaoFirebase.getAutenticacao().getCurrentUser() != null) {
         if(controllerData.usuarioLogado()) {
             controllerData.salvarUsuario(LoginActivity.this);
-//            HashMap<String, String> usuario = usuarioPreferencias.getDadosUsuariosPreferencias();
+//            HashMap<String, String> usuario = configuracaoPreferencias.getDadosUsuariosPreferencias();
 //            Log.i("ID", "id:" + usuario.get("id") );
 //            Log.i("NOME", "Nome:" + usuario.get("nome") );
 //            Log.i("EMAIL", "e-mail:" + usuario.get("email") );

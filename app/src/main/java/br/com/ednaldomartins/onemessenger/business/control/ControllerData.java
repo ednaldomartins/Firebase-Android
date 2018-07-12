@@ -1,9 +1,9 @@
-package br.com.ednaldomartins.onemessenger.control;
+package br.com.ednaldomartins.onemessenger.business.control;
 
-import br.com.ednaldomartins.onemessenger.data.local.UsuarioPreferencias;
+import br.com.ednaldomartins.onemessenger.data.local.ConfiguracaoPreferencias;
 import br.com.ednaldomartins.onemessenger.data.remote.ConfiguracaoFirebase;
-import br.com.ednaldomartins.onemessenger.model.UsuarioFirebase;
-import br.com.ednaldomartins.onemessenger.model.Usuario;
+import br.com.ednaldomartins.onemessenger.business.model.UsuarioFirebase;
+import br.com.ednaldomartins.onemessenger.business.model.Usuario;
 import br.com.ednaldomartins.onemessenger.view.Activity.LoginActivity;
 
 /****************************************************************************
@@ -14,7 +14,7 @@ import br.com.ednaldomartins.onemessenger.view.Activity.LoginActivity;
 public class ControllerData {
 
     UsuarioFirebase usuarioFirebase;
-    UsuarioPreferencias usuarioPreferencias;
+    ConfiguracaoPreferencias configuracaoPreferencias;
 
     public ControllerData() {
     }
@@ -42,9 +42,9 @@ public class ControllerData {
      ****************************************************************************/
     public void salvarUsuario(LoginActivity loginActivity) {
         usuarioFirebase = new UsuarioFirebase( ConfiguracaoFirebase.getAutenticacao().getCurrentUser() );
-        usuarioPreferencias = new UsuarioPreferencias( loginActivity.getApplicationContext() );
+        configuracaoPreferencias = new ConfiguracaoPreferencias( loginActivity.getApplicationContext() );
         Usuario auxUsuario = this.getObjetoUsuarioFirebase();
-        usuarioPreferencias.salvarUsuarioPreferencias( auxUsuario );
+        configuracaoPreferencias.salvarUsuarioPreferencias( auxUsuario );
         ConfiguracaoFirebase.getReferencia().child("usuarios").child( usuarioFirebase.getId() ).setValue( auxUsuario );
     }
 
