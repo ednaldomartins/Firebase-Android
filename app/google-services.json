@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "484291615009",
+    "firebase_url": "https://one-messenger-2018.firebaseio.com",
+    "project_id": "one-messenger-2018",
+    "storage_bucket": "one-messenger-2018.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:484291615009:android:63e5a2c3f70d1187",
+        "android_client_info": {
+          "package_name": "br.com.ednaldomartins.onemessenger"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "484291615009-shbabirdehdjgos6t994n2aa7d8nkck9.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "br.com.ednaldomartins.onemessenger",
+            "certificate_hash": "6d90657c702b708497dea1461573bc071c085836"
+          }
+        },
+        {
+          "client_id": "484291615009-p1a0fnnallghde4265phlsi6a622oke9.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCjRiqsABaJbHi8VJc59OhZW-tkVtL5SBw"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "484291615009-p1a0fnnallghde4265phlsi6a622oke9.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

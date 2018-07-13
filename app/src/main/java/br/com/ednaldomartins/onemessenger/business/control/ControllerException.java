@@ -130,7 +130,7 @@ public class ControllerException {
     }
 
 
-    //precis ser testado
+    //precisa ser testado
     //ConnectivityManager connectivityManager = (ConnectivityManager)getSystemService(Context.CONNECTIVITY_SERVICE);
     public boolean verificarConeccao (ConnectivityManager connectivityManager) throws IOException
     {

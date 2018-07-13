@@ -35,4 +35,13 @@ public final class ConfiguracaoFirebase {
         autenticacaoFirebase = firebaseAuth;
     }
 
+    public static boolean usuarioLogado ()
+    {
+        if (getAutenticacao().getCurrentUser() != null) {
+            return true;
+        }
+
+        return false;
+    }
+
 }

@@ -12,14 +12,14 @@
         android:roundIcon="@mipmap/icone_one_messenger"
         android:supportsRtl="true"
         android:theme="@style/OneTheme">
-        <activity android:name=".view.Activity.LoginActivity">
+        <activity android:name=".view.Activity.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".view.Activity.MainActivity"></activity>
+        <activity android:name=".view.Activity.LoginActivity"></activity>
     </application>
 
 </manifest>

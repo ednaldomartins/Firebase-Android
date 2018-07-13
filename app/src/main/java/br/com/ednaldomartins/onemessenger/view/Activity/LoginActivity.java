@@ -40,12 +40,6 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
     private static final String TAG = "LoginActivity";
     private static final int RC_SIGN_IN = 9001;
-    //autenticacao
-    private FirebaseAuth mAuth;
-    //usuario logado
-    private UsuarioFirebase usuarioFirebase;
-    private ConfiguracaoPreferencias configuracaoPreferencias;
-    //google
     private GoogleSignInClient mGoogleSignInClient;
 
     //vai sair dessa activity
@@ -60,25 +54,18 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
      * localmente como remotamente.                                             *
      ****************************************************************************/
     @Override
-    public void onStart() {
+    public void onStart()
+    {
         super.onStart();
-        // Check if user is signed in (non-null) and update UI accordingly.
-        //FirebaseUser currentUser = mAuth.getCurrentUser();
-        //if(ConfiguracaoFirebase.getAutenticacao().getCurrentUser() != null) {
-        if(controllerData.usuarioLogado()) {
-            controllerData.salvarUsuario(LoginActivity.this);
-//            HashMap<String, String> usuario = configuracaoPreferencias.getDadosUsuariosPreferencias();
-//            Log.i("ID", "id:" + usuario.get("id") );
-//            Log.i("NOME", "Nome:" + usuario.get("nome") );
-//            Log.i("EMAIL", "e-mail:" + usuario.get("email") );
-        }
+        //signOut da ultima conta, pra perguntar novamente qual conta do Gmail quer logar
+        mGoogleSignInClient.signOut();
     }
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState)
+    {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
-        //mAuth = FirebaseAuth.getInstance();
 
         // Configure Google Sign In
         GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
@@ -91,6 +78,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         iniciarViews();
         iniciarListener();
 
+
     }
 
 
@@ -100,7 +88,8 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
      * no app e atualizar dados do usuario no app.                              *
      ****************************************************************************/
     @Override
-    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+    public void onActivityResult(int requestCode, int resultCode, Intent data)
+    {
         super.onActivityResult(requestCode, resultCode, data);
         // Result returned from launching the Intent from GoogleSignInApi.getSignInIntent(...);
         if (requestCode == RC_SIGN_IN) {
@@ -119,7 +108,8 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
     }
 
-    private void firebaseAuthWithGoogle(GoogleSignInAccount acct) {
+    private void firebaseAuthWithGoogle(GoogleSignInAccount acct)
+    {
         Log.d(TAG, "firebaseAuthWithGoogle:" + acct.getId());
 
         AuthCredential credential = GoogleAuthProvider.getCredential(acct.getIdToken(), null);
@@ -131,6 +121,8 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                             // Sign in success, update UI with the signed-in user's information
                             Log.d(TAG, "signInWithCredential:success");
                             controllerData.salvarUsuario(LoginActivity.this);
+
+                            finish();
                         } else {
                             // If sign in fails, display a message to the user.
                             Log.w(TAG, "signInWithCredential:failure", task.getException());
@@ -141,18 +133,11 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
     }
 
-    private void signIn() {
+    private void signIn()
+    {
         Intent signInIntent = mGoogleSignInClient.getSignInIntent();
         startActivityForResult(signInIntent, RC_SIGN_IN);
     }
-
-    private void signOut() {
-        FirebaseAuth.getInstance().signOut();
-    }
-
-
-
-
 
     /****************************************************************************
      * Abaixo estao os metodos necessarios para trabalhar com a view da tela    *
@@ -168,7 +153,8 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     }
 
     //colocar aqui os listener para os elementos da tela de login
-    protected void iniciarListener () {
+    protected void iniciarListener ()
+    {
         //findViewById(R.id.login_logoApp).setOnClickListener(this);
         //findViewById(R.id.login_nomeApp).setOnClickListener(this);
         findViewById(R.id.login_botaoSignInGoogle).setOnClickListener(this);
@@ -176,7 +162,8 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
     //implementacao do metodo para executar funcoes dos clicks
     @Override
-    public void onClick(View view) {
+    public void onClick(View view)
+    {
         int id = view.getId();
         if(id == R.id.login_botaoSignInGoogle) {
             signIn();
@@ -184,7 +171,8 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     }
 
     @Override
-    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults)
+    {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
         controllerPermissao.garantirPermissao(this, grantResults, requestCode);
     }
